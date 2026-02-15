@@ -1,0 +1,27 @@
+{
+  "name": "Zerin Heritage",
+  "short_name": "Zerin Heritage",
+  "description": "Luxury South Asian Fashion & Heritage Wear",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#B22222",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["shopping", "lifestyle", "fashion"],
+  "lang": "en-US",
+  "dir": "ltr"
+}
