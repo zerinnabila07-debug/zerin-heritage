@@ -1,11 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import ScrollReveal from './ScrollReveal';
+import { motion, useInView } from 'framer-motion';
 import { useCheckout } from '../context/CheckoutContext';
 import ImageLightbox from './ImageLightbox';
+import { 
+  staggerContainer, 
+  gridItemVariants, 
+  headerVariants, 
+  headerItemVariants,
+  viewportOptions 
+} from '../utils/animations';
 
 const eidProducts = [
   { id: 1, image: '/images/eid/eid1.jpg', title: 'Premium Silk Collection', price: '৳12,999' },
@@ -17,28 +23,55 @@ export default function EidSection() {
   const { openCheckout } = useCheckout();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const headerRef = useRef(null);
+  const gridRef = useRef(null);
+  const isHeaderInView = useInView(headerRef, viewportOptions);
+  const isGridInView = useInView(gridRef, viewportOptions);
 
   return (
-    <section className="py-12 md:py-20 px-6 md:px-12 lg:px-24 bg-white">
-      <ScrollReveal>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-sm font-sans tracking-widest text-[#E0115F] mb-2">SPECIAL COLLECTION</p>
-            <h2 className="text-4xl md:text-5xl font-serif text-[#2C2C2C] mb-3">
-              EID Collection 2026
-            </h2>
-            <p className="text-base text-[#2C2C2C] opacity-70 font-sans">
-              Celebrate in elegance with our exclusive EID designs
-            </p>
-          </div>
+    <section className="py-24 px-6 md:px-12 lg:px-24 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <motion.div 
+          ref={headerRef}
+          variants={headerVariants}
+          initial="hidden"
+          animate={isHeaderInView ? "visible" : "hidden"}
+          className="text-center mb-16"
+        >
+          <motion.p 
+            variants={headerItemVariants}
+            className="text-sm font-sans tracking-widest text-[#C5A059] mb-3 uppercase font-medium"
+          >
+            SPECIAL COLLECTION
+          </motion.p>
+          <motion.h2 
+            variants={headerItemVariants}
+            className="text-4xl md:text-5xl font-serif text-[#1A1A1A] mb-4"
+          >
+            EID Collection 2026
+          </motion.h2>
+          <motion.p 
+            variants={headerItemVariants}
+            className="text-base text-[#8A8A8A] font-sans"
+          >
+            Celebrate in elegance with our exclusive EID designs
+          </motion.p>
+        </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {eidProducts.map((product, index) => (
-              <ScrollReveal key={product.id} delay={index * 0.2}>
-                <motion.div
-                  whileHover={{ y: -10 }}
-                  className="group cursor-pointer"
-                >
+        <motion.div 
+          ref={gridRef}
+          variants={staggerContainer}
+          initial="hidden"
+          animate={isGridInView ? "visible" : "hidden"}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
+          {eidProducts.map((product) => (
+            <motion.div
+              key={product.id}
+              variants={gridItemVariants}
+              whileHover={{ y: -10 }}
+              className="group cursor-pointer"
+            >
                   <div className="relative aspect-[4/5] overflow-hidden mb-4">
                     <motion.div
                       whileHover={{ scale: 1.1 }}
@@ -72,25 +105,23 @@ export default function EidSection() {
                         onClick={() => openCheckout({ title: product.title, price: product.price })}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="px-6 py-3 bg-[#E0115F] text-white font-sans font-medium shadow-lg"
+                        className="px-6 py-3 bg-[#C5A059] text-white font-sans font-medium uppercase tracking-wider shadow-lg hover:bg-[#B8935A] transition-colors"
                       >
                         Shop Now
                       </motion.button>
                     </div>
                   </div>
 
-                  <h3 className="text-lg font-serif text-[#2C2C2C] mb-1 group-hover:text-[#E0115F] transition-colors mt-3">
+                  <h3 className="text-lg font-serif text-[#1A1A1A] mb-1 group-hover:text-[#C5A059] transition-colors mt-3">
                     {product.title}
                   </h3>
-                  <p className="text-base font-sans font-medium text-[#E0115F]">
+                  <p className="text-base font-sans font-medium text-[#C5A059]">
                     {product.price}
                   </p>
                 </motion.div>
-              </ScrollReveal>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </ScrollReveal>
 
       <ImageLightbox
         isOpen={lightboxOpen}

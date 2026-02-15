@@ -79,8 +79,9 @@ Place these files in the `/public` directory:
 ✅ Metadata configured in layout.js
 ✅ site.webmanifest created
 ✅ robots.txt created
-⚠️  Favicon files needed
-⚠️  og-image.jpg needed
+✅ og-image.jpg added (973KB)
+🔧 Favicon temporarily using /logo.png (icons commented out to prevent 404s)
+⚠️  Professional favicon package needed (see ICON_SETUP_GUIDE.md)
 
 ## Installation
 

@@ -145,13 +145,13 @@ export default function Navbar() {
   return (
     <header className="absolute top-0 left-0 right-0 z-50 transition-all duration-300">
       <div 
-        className={`bg-[#B22222] text-white py-2.5 transition-all duration-300 ${
+        className={`bg-[#D10056] text-white py-2.5 transition-all duration-300 ${
           showTopBar ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
         }`}
       >
         <div className="max-w-[1440px] mx-auto px-4 md:px-10">
           <div className="flex items-center justify-center">
-            <p className="text-[10px] md:text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
+            <p className="text-[10px] md:text-xs font-sans font-semibold uppercase tracking-wider flex items-center gap-1.5">
               EID SPECIAL: UP TO 60% OFF
               <ChevronRight size={12} strokeWidth={2.5} />
             </p>
@@ -193,10 +193,10 @@ export default function Navbar() {
                 >
                   <Link
                     href={item.href}
-                    className={`text-[15px] font-medium transition-all duration-300 flex items-center gap-1 ${
+                    className={`text-[15px] font-sans font-medium transition-all duration-300 flex items-center gap-1 ${
                       isScrolled 
-                        ? 'text-[#2C2C2C] hover:text-[#B22222]' 
-                        : 'text-white hover:text-[#FF7F24]'
+                        ? 'text-[#1A1A1A] hover:text-[#C5A059]' 
+                        : 'text-white hover:text-[#C5A059]'
                     }`}
                   >
                     {item.name}
@@ -218,7 +218,7 @@ export default function Navbar() {
                 onMouseEnter={() => setHoveredMenu(hoveredMenu)}
                 onMouseLeave={() => setHoveredMenu(null)}
               >
-                <div className="w-full bg-white shadow-xl border-t-2 border-[#CD7F32]/30">
+                <div className="w-full bg-white shadow-xl border-t-2 border-[#C5A059]/30">
                   <div className="max-w-[1440px] mx-auto px-10 py-10">
                     <div className={`grid ${
                       menuItems.find(item => item.name === hoveredMenu)?.megaMenu.columns.length === 3 
@@ -229,7 +229,7 @@ export default function Navbar() {
                     } gap-16`}>
                       {menuItems.find(item => item.name === hoveredMenu)?.megaMenu.columns.map((column, idx) => (
                         <div key={idx}>
-                          <h3 className="text-[15px] font-semibold text-[#2C2C2C] mb-5 pb-2 border-b-2 border-[#CD7F32]/40 tracking-wide uppercase text-sm">
+                          <h3 className="text-[15px] font-serif font-semibold text-[#1A1A1A] mb-5 pb-2 border-b-2 border-[#C5A059]/40 tracking-wide uppercase text-sm">
                             {column.title}
                           </h3>
                           <ul className="space-y-3">
@@ -240,7 +240,7 @@ export default function Navbar() {
                                 <li key={subItem}>
                                   <Link
                                     href={`/${parentSlug}/${slug}`}
-                                    className="text-[14px] text-[#2C2C2C] hover:text-[#B22222] hover:translate-x-1 transition-all duration-200 block font-medium"
+                                    className="text-[14px] font-sans text-[#1A1A1A] hover:text-[#C5A059] hover:translate-x-1 transition-all duration-200 block font-medium"
                                   >
                                     {subItem}
                                   </Link>
@@ -261,8 +261,8 @@ export default function Navbar() {
                 onClick={() => setSearchOpen(!searchOpen)}
                 className={`hidden md:block hover:scale-110 transition-all duration-300 ${
                   isScrolled 
-                    ? 'text-[#4A4A4A] hover:text-[#B22222]' 
-                    : 'text-white hover:text-[#FF7F24]'
+                    ? 'text-[#1A1A1A] hover:text-[#C5A059]' 
+                    : 'text-white hover:text-[#C5A059]'
                 }`}
                 aria-label="Search"
               >
@@ -272,8 +272,8 @@ export default function Navbar() {
                 href="/login"
                 className={`hidden md:block hover:scale-110 transition-all duration-300 ${
                   isScrolled 
-                    ? 'text-[#4A4A4A] hover:text-[#B22222]' 
-                    : 'text-white hover:text-[#FF7F24]'
+                    ? 'text-[#1A1A1A] hover:text-[#C5A059]' 
+                    : 'text-white hover:text-[#C5A059]'
                 }`}
                 aria-label="Profile"
               >
@@ -283,8 +283,8 @@ export default function Navbar() {
                 href="/wishlist"
                 className={`hidden md:block hover:scale-110 transition-all duration-300 ${
                   isScrolled 
-                    ? 'text-[#4A4A4A] hover:text-[#B22222]' 
-                    : 'text-white hover:text-[#FF7F24]'
+                    ? 'text-[#1A1A1A] hover:text-[#C5A059]' 
+                    : 'text-white hover:text-[#C5A059]'
                 }`}
                 aria-label="Wishlist"
               >
@@ -294,14 +294,14 @@ export default function Navbar() {
                 href="/cart"
                 className={`hover:scale-110 transition-all duration-300 relative ${
                   isScrolled 
-                    ? 'text-[#4A4A4A] hover:text-[#B22222]' 
-                    : 'text-white hover:text-[#FF7F24]'
+                    ? 'text-[#1A1A1A] hover:text-[#C5A059]' 
+                    : 'text-white hover:text-[#C5A059]'
                 }`}
                 aria-label="Shopping Bag"
               >
                 <ShoppingBag size={22} strokeWidth={1.5} />
-                <span className={`absolute -top-1.5 -right-1.5 text-white text-[9px] font-semibold rounded-full w-4 h-4 flex items-center justify-center transition-colors duration-300 ${
-                  isScrolled ? 'bg-[#B22222]' : 'bg-[#FF7F24]'
+                <span className={`absolute -top-1.5 -right-1.5 text-white text-[9px] font-sans font-semibold rounded-full w-4 h-4 flex items-center justify-center transition-colors duration-300 ${
+                  isScrolled ? 'bg-[#D10056]' : 'bg-[#C5A059]'
                 }`}>
                   0
                 </span>
@@ -309,8 +309,8 @@ export default function Navbar() {
               <button 
                 className={`lg:hidden hover:scale-110 transition-all duration-300 ${
                   isScrolled 
-                    ? 'text-[#4A4A4A] hover:text-[#B22222]' 
-                    : 'text-white hover:text-[#FF7F24]'
+                    ? 'text-[#1A1A1A] hover:text-[#C5A059]' 
+                    : 'text-white hover:text-[#C5A059]'
                 }`}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Menu"
@@ -326,16 +326,16 @@ export default function Navbar() {
         <div className="bg-white border-b border-gray-200 shadow-lg animate-fadeIn">
           <div className="max-w-[1440px] mx-auto px-4 md:px-10 py-6">
             <div className="flex items-center gap-4">
-              <Search size={20} className="text-[#4A4A4A]" strokeWidth={1.5} />
+              <Search size={20} className="text-[#8A8A8A]" strokeWidth={1.5} />
               <input
                 type="text"
                 placeholder="Search for products, categories..."
-                className="flex-1 text-[15px] text-[#2C2C2C] placeholder:text-gray-400 focus:outline-none"
+                className="flex-1 text-[15px] font-sans text-[#1A1A1A] placeholder:text-gray-400 focus:outline-none focus:ring-0"
                 autoFocus
               />
               <button
                 onClick={() => setSearchOpen(false)}
-                className="text-[#4A4A4A] hover:text-[#B22222] transition-colors"
+                className="text-[#8A8A8A] hover:text-[#C5A059] transition-colors"
                 aria-label="Close search"
               >
                 <X size={20} strokeWidth={1.5} />
@@ -353,7 +353,7 @@ export default function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-[15px] font-medium text-[#2C2C2C] hover:text-[#B22222] transition-colors py-2"
+                  className="text-[15px] font-sans font-medium text-[#1A1A1A] hover:text-[#C5A059] transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
@@ -365,14 +365,14 @@ export default function Navbar() {
                     setSearchOpen(!searchOpen);
                     setMobileMenuOpen(false);
                   }}
-                  className="text-[#4A4A4A] hover:text-[#B22222] transition-colors" 
+                  className="text-[#1A1A1A] hover:text-[#C5A059] transition-colors" 
                   aria-label="Search"
                 >
                   <Search size={20} strokeWidth={1.5} />
                 </button>
                 <Link 
                   href="/login"
-                  className="text-[#4A4A4A] hover:text-[#B22222] transition-colors" 
+                  className="text-[#1A1A1A] hover:text-[#C5A059] transition-colors" 
                   aria-label="Profile"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -380,7 +380,7 @@ export default function Navbar() {
                 </Link>
                 <Link 
                   href="/wishlist"
-                  className="text-[#4A4A4A] hover:text-[#B22222] transition-colors" 
+                  className="text-[#1A1A1A] hover:text-[#C5A059] transition-colors" 
                   aria-label="Wishlist"
                   onClick={() => setMobileMenuOpen(false)}
                 >

@@ -1,101 +1,154 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
-import ScrollReveal from './ScrollReveal';
-import { motion } from 'framer-motion';
+import { Eye } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
 import { useCheckout } from '../context/CheckoutContext';
+import { 
+  staggerContainer, 
+  gridItemVariants, 
+  headerVariants, 
+  headerItemVariants,
+  viewportOptions 
+} from '../utils/animations';
 
 const collections = [
   {
     id: 1,
     title: 'Bridal Wear',
-    description: 'Exquisite designs for your special day',
+    price: '৳18,999',
+    tag: 'Exclusive',
     image: '/images/collections/c1.jpg'
   },
   {
     id: 2,
     title: 'Heritage Saree',
-    description: 'Traditional elegance reimagined',
+    price: '৳12,999',
+    tag: 'New Arrival',
     image: '/images/collections/c2.jpg'
   },
   {
     id: 3,
     title: 'Modern Chic',
-    description: 'Contemporary sophistication',
+    price: '৳9,999',
+    tag: 'Trending',
     image: '/images/collections/c3.jpg'
+  },
+  {
+    id: 4,
+    title: 'Festive Collection',
+    price: '৳14,999',
+    tag: 'Sale',
+    image: '/images/collections/c1.jpg'
   }
 ];
 
 export default function CollectionGrid() {
   const { openCheckout } = useCheckout();
   const [hoveredId, setHoveredId] = useState(null);
+  const headerRef = useRef(null);
+  const gridRef = useRef(null);
+  const isHeaderInView = useInView(headerRef, viewportOptions);
+  const isGridInView = useInView(gridRef, viewportOptions);
 
   return (
-    <section className="py-12 md:py-20 px-6 md:px-12 lg:px-24 bg-white">
+    <section className="py-24 px-6 md:px-12 lg:px-24 bg-white">
       <div className="max-w-7xl mx-auto">
-        <ScrollReveal>
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-serif text-[#2C2C2C] mb-3">
-              Featured Collections
-            </h2>
-            <p className="text-base text-[#2C2C2C] opacity-70 font-sans">
-              Discover our curated selection of timeless pieces
-            </p>
-          </div>
-        </ScrollReveal>
+        <motion.div 
+          ref={headerRef}
+          variants={headerVariants}
+          initial="hidden"
+          animate={isHeaderInView ? "visible" : "hidden"}
+          className="text-center mb-16"
+        >
+          <motion.h2 
+            variants={headerItemVariants}
+            className="text-4xl md:text-5xl font-serif text-[#1A1A1A] mb-4"
+          >
+            Featured Collections
+          </motion.h2>
+          <motion.p 
+            variants={headerItemVariants}
+            className="text-base text-[#8A8A8A] font-sans"
+          >
+            Discover our curated selection of timeless pieces
+          </motion.p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {collections.map((collection, index) => (
-            <ScrollReveal key={collection.id} delay={index * 0.2}>
-              <div
-                className="group relative overflow-hidden cursor-pointer"
-                onMouseEnter={() => setHoveredId(collection.id)}
-                onMouseLeave={() => setHoveredId(null)}
-              >
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                    className="w-full h-full"
+        <motion.div 
+          ref={gridRef}
+          variants={staggerContainer}
+          initial="hidden"
+          animate={isGridInView ? "visible" : "hidden"}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+        >
+          {collections.map((collection) => (
+            <motion.div
+              key={collection.id}
+              variants={gridItemVariants}
+              onMouseEnter={() => setHoveredId(collection.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              className="group"
+            >
+              <div className="relative aspect-[3/4] mb-3 overflow-hidden bg-gray-50">
+                <motion.div
+                  animate={{ scale: hoveredId === collection.id ? 1.08 : 1 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className="w-full h-full"
+                >
+                  <Image
+                    src={collection.image}
+                    alt={collection.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                </motion.div>
+
+                <div className="absolute top-3 left-3 z-10">
+                  <span className="px-2.5 py-1 bg-white/95 backdrop-blur-sm text-[#1A1A1A] text-[10px] font-sans font-medium uppercase tracking-wider shadow-sm">
+                    {collection.tag}
+                  </span>
+                </div>
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: hoveredId === collection.id ? 1 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute inset-0 bg-black/20"
+                />
+
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ 
+                    opacity: hoveredId === collection.id ? 1 : 0,
+                    y: hoveredId === collection.id ? 0 : 10
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <button
+                    onClick={() => openCheckout({ title: collection.title, price: collection.price })}
+                    className="px-6 py-2.5 bg-white text-[#1A1A1A] font-sans font-medium text-sm uppercase tracking-wider shadow-lg hover:bg-[#1A1A1A] hover:text-white transition-all duration-300 flex items-center gap-2"
                   >
-                    <Image
-                      src={collection.image}
-                      alt={collection.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
-                    />
-                  </motion.div>
-                  
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                
-                <div className="absolute inset-0 flex flex-col justify-end p-8">
-                  <div className={`transform transition-all duration-500 ${
-                    hoveredId === collection.id ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-                  }`}>
-                    <div className="w-12 h-0.5 bg-[#E0115F] mb-4"></div>
-                  </div>
-                  
-                  <h3 className="text-3xl font-serif text-white mb-2">
-                    {collection.title}
-                  </h3>
-                  <p className="text-white opacity-90 font-sans mb-4">
-                    {collection.description}
-                  </p>
-                  
-                  <button 
-                    onClick={() => openCheckout({ title: collection.title })}
-                    className="self-start px-6 py-2 bg-white text-[#2C2C2C] font-sans font-medium hover:bg-[#E0115F] hover:text-white transition-all duration-300"
-                  >
-                    Shop Now
+                    <Eye size={16} strokeWidth={2} />
+                    Quick View
                   </button>
-                </div>
-                </div>
+                </motion.div>
               </div>
-            </ScrollReveal>
+
+              <div className="space-y-1">
+                <h3 className="text-base font-sans font-semibold text-[#1A1A1A] leading-tight">
+                  {collection.title}
+                </h3>
+                <p className="text-base font-sans font-medium text-[#D10056]">
+                  {collection.price}
+                </p>
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

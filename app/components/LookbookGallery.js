@@ -1,10 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
-import ScrollReveal from './ScrollReveal';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import ImageLightbox from './ImageLightbox';
+import { 
+  staggerContainer, 
+  gridItemVariants, 
+  headerVariants, 
+  headerItemVariants,
+  viewportOptions 
+} from '../utils/animations';
 
 const lookbookItems = [
   { id: 1, image: '/images/lookbook/l1.jpg', height: 'h-[400px]', title: 'Spring Collection' },
@@ -19,29 +25,46 @@ export default function LookbookGallery() {
   const [hoveredId, setHoveredId] = useState(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const headerRef = useRef(null);
+  const galleryRef = useRef(null);
+  const isHeaderInView = useInView(headerRef, viewportOptions);
+  const isGalleryInView = useInView(galleryRef, viewportOptions);
 
   return (
-    <section className="py-12 md:py-20 px-6 md:px-12 lg:px-24 bg-gradient-to-b from-white to-[#FFF0F5]">
+    <section className="py-24 px-6 md:px-12 lg:px-24 bg-gradient-to-b from-white to-[#FFF9F5]">
       <div className="max-w-7xl mx-auto">
-        <ScrollReveal>
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-serif text-[#2C2C2C] mb-3">
-              Lookbook
-            </h2>
-            <p className="text-base text-[#2C2C2C] opacity-70 font-sans max-w-2xl mx-auto">
-              Explore our latest collection through the lens of high fashion
-            </p>
-          </div>
-        </ScrollReveal>
+        <motion.div 
+          ref={headerRef}
+          variants={headerVariants}
+          initial="hidden"
+          animate={isHeaderInView ? "visible" : "hidden"}
+          className="text-center mb-16"
+        >
+          <motion.h2 
+            variants={headerItemVariants}
+            className="text-4xl md:text-5xl font-serif text-[#1A1A1A] mb-4"
+          >
+            Lookbook
+          </motion.h2>
+          <motion.p 
+            variants={headerItemVariants}
+            className="text-base text-[#8A8A8A] font-sans max-w-2xl mx-auto"
+          >
+            Explore our latest collection through the lens of high fashion
+          </motion.p>
+        </motion.div>
 
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-          {lookbookItems.map((item, index) => (
+        <motion.div 
+          ref={galleryRef}
+          variants={staggerContainer}
+          initial="hidden"
+          animate={isGalleryInView ? "visible" : "hidden"}
+          className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6"
+        >
+          {lookbookItems.map((item) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              variants={gridItemVariants}
               className="break-inside-avoid relative group cursor-pointer"
               onMouseEnter={() => setHoveredId(item.id)}
               onMouseLeave={() => setHoveredId(null)}
@@ -65,48 +88,52 @@ export default function LookbookGallery() {
                   hoveredId === item.id ? 'opacity-100' : 'opacity-0'
                 }`}></div>
 
-                <div className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
-                  hoveredId === item.id ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-                }`}>
-                  <div className="text-center bg-white/95 px-8 py-6 backdrop-blur-sm rounded-lg">
-                    <h3 className="text-2xl font-serif text-[#2C2C2C] mb-4">
-                      {item.title}
-                    </h3>
-                    <button 
-                      onClick={() => {
-                        setCurrentImageIndex(index);
-                        setLightboxOpen(true);
-                      }}
-                      className="px-6 py-2 bg-[#E0115F] text-white font-sans font-medium hover:bg-[#C00F54] transition-colors duration-300"
-                    >
-                      View Full Gallery
-                    </button>
+                  <div className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
+                    hoveredId === item.id ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                  }`}>
+                    <div className="text-center bg-white/95 px-8 py-6 backdrop-blur-sm rounded-lg">
+                      <h3 className="text-2xl font-serif text-[#1A1A1A] mb-4">
+                        {item.title}
+                      </h3>
+                      <button 
+                        onClick={() => {
+                          setCurrentImageIndex(index);
+                          setLightboxOpen(true);
+                        }}
+                        className="px-6 py-2 bg-[#C5A059] text-white font-sans font-medium uppercase tracking-wider hover:bg-[#B8935A] transition-colors duration-300"
+                      >
+                        View Full Gallery
+                      </button>
+                    </div>
                   </div>
-                </div>
 
-                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#E0115F] to-[#FFB6C1] transform origin-bottom transition-transform duration-500 ${
-                  hoveredId === item.id ? 'scale-y-100' : 'scale-y-0'
-                }`}></div>
+                  <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#C5A059] to-[#D10056] transform origin-bottom transition-transform duration-500 ${
+                    hoveredId === item.id ? 'scale-y-100' : 'scale-y-0'
+                  }`}></div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <ScrollReveal delay={0.4}>
-          <div className="text-center mt-12">
-            <motion.button
-              onClick={() => {
-                setCurrentImageIndex(0);
-                setLightboxOpen(true);
-              }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-12 py-4 border-2 border-[#E0115F] text-[#E0115F] font-sans font-medium text-lg hover:bg-[#E0115F] hover:text-white transition-all duration-300"
-            >
-              View Full Lookbook
-            </motion.button>
-          </div>
-        </ScrollReveal>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1.0] }}
+          viewport={viewportOptions}
+          className="text-center mt-12"
+        >
+          <motion.button
+            onClick={() => {
+              setCurrentImageIndex(0);
+              setLightboxOpen(true);
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-12 py-4 border-2 border-[#C5A059] text-[#C5A059] font-sans font-medium text-lg uppercase tracking-wider hover:bg-[#C5A059] hover:text-white transition-all duration-300"
+          >
+            View Full Lookbook
+          </motion.button>
+        </motion.div>
       </div>
 
       <ImageLightbox

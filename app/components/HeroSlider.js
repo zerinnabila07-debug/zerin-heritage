@@ -103,7 +103,7 @@ export default function HeroSlider() {
             fill
             className="object-cover object-[center_30%]"
             priority
-            quality={100}
+            quality={90}
           />
           
           <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/50 to-black/60"></div>
@@ -115,7 +115,7 @@ export default function HeroSlider() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
-                className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-3 md:mb-4 tracking-widest leading-tight drop-shadow-2xl"
+                className="text-4xl md:text-6xl lg:text-7xl font-serif font-semibold text-white mb-3 md:mb-4 tracking-wider leading-tight drop-shadow-2xl"
                 style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.6)' }}
               >
                 {slides[currentSlide].title}
@@ -125,7 +125,7 @@ export default function HeroSlider() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
-                className="text-lg md:text-xl lg:text-2xl text-white mb-6 md:mb-8 font-light drop-shadow-xl tracking-wide"
+                className="text-lg md:text-xl lg:text-2xl font-sans text-white mb-6 md:mb-8 font-light drop-shadow-xl tracking-wide"
                 style={{ textShadow: '0 2px 12px rgba(0,0,0,0.7)' }}
               >
                 {slides[currentSlide].subtitle}
@@ -138,8 +138,8 @@ export default function HeroSlider() {
               >
                 <button
                   onClick={() => openCheckout({ title: slides[currentSlide].title })}
-                  className="inline-block px-10 md:px-12 py-3 md:py-4 bg-[#FF7F24] text-white font-sans font-semibold text-base md:text-lg tracking-wider hover:bg-[#FF6A00] transition-all duration-300 hover:scale-105 shadow-2xl"
-                  style={{ boxShadow: '0 8px 30px rgba(0,0,0,0.5), 0 4px 12px rgba(255,127,36,0.4)' }}
+                  className="inline-block px-10 md:px-12 py-3 md:py-4 bg-[#C5A059] text-white font-sans font-medium text-base md:text-lg uppercase tracking-wider hover:bg-[#B8935A] transition-all duration-300 hover:scale-105 shadow-2xl"
+                  style={{ boxShadow: '0 8px 30px rgba(0,0,0,0.5), 0 4px 12px rgba(197,160,89,0.4)' }}
                 >
                   Shop Now
                 </button>
@@ -172,7 +172,7 @@ export default function HeroSlider() {
             onClick={() => goToSlide(index)}
             className={`transition-all duration-300 rounded-full ${
               index === currentSlide
-                ? 'w-12 h-3 bg-[#FF7F24]'
+                ? 'w-12 h-3 bg-[#C5A059]'
                 : 'w-3 h-3 bg-white/50 hover:bg-white/80'
             }`}
             aria-label={`Go to slide ${index + 1}`}
