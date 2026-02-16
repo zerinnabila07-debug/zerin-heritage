@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import CheckoutModal from "./components/CheckoutModal";
+import Chatbot from "./components/Chatbot";
 import StructuredData from "./components/StructuredData";
 import { CheckoutProvider } from "./context/CheckoutContext";
 
@@ -91,6 +92,7 @@ export default function RootLayout({ children }) {
           <Footer />
           <ScrollToTop />
           <CheckoutModal />
+          <Chatbot />
         </CheckoutProvider>
       </body>
     </html>
