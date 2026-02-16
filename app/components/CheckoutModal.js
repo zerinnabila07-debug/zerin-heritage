@@ -8,16 +8,31 @@ import { useCheckout } from '../context/CheckoutContext';
 import Confetti from 'react-confetti';
 
 const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-const paymentMethods = [
-  { id: 'online', name: 'Online Payment', desc: 'bKash / Nagad / Rocket', icon: CreditCard, hasLogos: true },
-  { id: 'bank', name: 'Bank Transfer', desc: 'Direct bank transfer', icon: Building2, hasLogos: false },
-  { id: 'cod', name: 'Cash on Delivery', desc: 'Pay when you receive', icon: Wallet, hasLogos: false }
+
+const paymentCategories = [
+  { id: 'mobile', name: 'Mobile Banking', icon: CreditCard },
+  { id: 'cards', name: 'Cards', icon: CreditCard },
+  { id: 'netbanking', name: 'Net Banking', icon: Building2 }
 ];
 
-const mobilePaymentLogos = [
-  { name: 'bKash', logo: '/images/payment/bkash.png' },
-  { name: 'Nagad', logo: '/images/payment/Nagad.png' },
-  { name: 'Rocket', logo: '/images/payment/rocket.png' }
+const paymentOptions = {
+  mobile: [
+    { name: 'bKash', logo: '/images/payment/bkash.png' },
+    { name: 'Nagad', logo: '/images/payment/Nagad.png' },
+    { name: 'Rocket', logo: '/images/payment/rocket.png' }
+  ],
+  cards: [
+    { name: 'Visa', logo: '/images/payment/visa.png' },
+    { name: 'Mastercard', logo: '/images/payment/mastercard.png' }
+  ],
+  netbanking: [
+    { name: 'City Bank', logo: '/images/payment/citybank.png' },
+    { name: 'DBBL', logo: '/images/payment/dbbl.png' }
+  ]
+};
+
+const otherPaymentMethods = [
+  { id: 'cod', name: 'Cash on Delivery', desc: 'Pay when you receive', icon: Wallet }
 ];
 
 export default function CheckoutModal() {
@@ -30,7 +45,8 @@ export default function CheckoutModal() {
     size: 'M'
   });
   const [paymentMethod, setPaymentMethod] = useState('');
-  const [selectedMobilePayment, setSelectedMobilePayment] = useState('');
+  const [activeCategory, setActiveCategory] = useState('mobile');
+  const [selectedPaymentOption, setSelectedPaymentOption] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
 
@@ -45,7 +61,7 @@ export default function CheckoutModal() {
 
   const handlePayment = async () => {
     if (!paymentMethod) return;
-    if (paymentMethod === 'online' && !selectedMobilePayment) return;
+    if (paymentMethod === 'online' && !selectedPaymentOption) return;
     
     if (paymentMethod === 'online') {
       setIsProcessing(true);
@@ -64,7 +80,8 @@ export default function CheckoutModal() {
       setStep(1);
       setFormData({ fullName: '', phone: '', address: '', size: 'M' });
       setPaymentMethod('');
-      setSelectedMobilePayment('');
+      setActiveCategory('mobile');
+      setSelectedPaymentOption('');
       setShowConfetti(false);
     }, 300);
   };
@@ -196,8 +213,101 @@ export default function CheckoutModal() {
                 >
                   <p className="text-gray-600 mb-6">Choose your preferred payment method</p>
                   
+                  {/* Online Payment Section */}
+                  <div className="mb-6">
+                    <button
+                      onClick={() => setPaymentMethod('online')}
+                      className={`w-full p-4 border-2 rounded-lg transition-all duration-300 ${
+                        paymentMethod === 'online'
+                          ? 'border-[#C5A059] bg-[#C5A059]/5 shadow-md'
+                          : 'border-gray-200 hover:border-[#C5A059]/50'
+                      }`}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
+                          paymentMethod === 'online' ? 'bg-[#C5A059] text-white' : 'bg-gray-100 text-gray-600'
+                        }`}>
+                          <CreditCard size={24} />
+                        </div>
+                        <div className="text-left flex-1">
+                          <p className="font-semibold text-[#2C2C2C]">Online Payment</p>
+                          <p className="text-sm text-gray-600">Mobile Banking, Cards & Net Banking</p>
+                        </div>
+                      </div>
+                      
+                      {/* Payment Categories Tabs */}
+                      {paymentMethod === 'online' && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="mt-4 pt-4 border-t border-gray-200"
+                        >
+                          {/* Category Tabs */}
+                          <div className="flex gap-2 mb-4 overflow-x-auto pb-2">
+                            {paymentCategories.map((category) => (
+                              <button
+                                key={category.id}
+                                type="button"
+                                onClick={() => {
+                                  setActiveCategory(category.id);
+                                  setSelectedPaymentOption('');
+                                }}
+                                className={`px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all duration-300 ${
+                                  activeCategory === category.id
+                                    ? 'bg-[#C5A059] text-white shadow-md'
+                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                }`}
+                              >
+                                {category.name}
+                              </button>
+                            ))}
+                          </div>
+
+                          {/* Payment Options Grid */}
+                          <AnimatePresence mode="wait">
+                            <motion.div
+                              key={activeCategory}
+                              initial={{ opacity: 0, x: 20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              exit={{ opacity: 0, x: -20 }}
+                              transition={{ duration: 0.3 }}
+                              className="grid grid-cols-2 sm:grid-cols-3 gap-3"
+                            >
+                              {paymentOptions[activeCategory].map((option) => (
+                                <button
+                                  key={option.name}
+                                  type="button"
+                                  onClick={() => setSelectedPaymentOption(option.name)}
+                                  className={`relative h-[60px] p-3 bg-white rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
+                                    selectedPaymentOption === option.name
+                                      ? 'border-[#C5A059] shadow-lg shadow-[#C5A059]/20'
+                                      : 'border-gray-200 hover:border-[#C5A059]/50'
+                                  }`}
+                                >
+                                  <div className="relative h-full w-full">
+                                    <Image
+                                      src={option.logo}
+                                      alt={option.name}
+                                      fill
+                                      className="object-contain"
+                                      sizes="120px"
+                                      unoptimized
+                                    />
+                                  </div>
+                                </button>
+                              ))}
+                            </motion.div>
+                          </AnimatePresence>
+                        </motion.div>
+                      )}
+                    </button>
+                  </div>
+
+                  {/* Other Payment Methods */}
                   <div className="space-y-4 mb-6">
-                    {paymentMethods.map((method) => {
+                    {otherPaymentMethods.map((method) => {
                       const Icon = method.icon;
                       return (
                         <button
@@ -220,38 +330,6 @@ export default function CheckoutModal() {
                               <p className="text-sm text-gray-600">{method.desc}</p>
                             </div>
                           </div>
-                          
-                          {/* Show clickable payment logos for online payment */}
-                          {method.hasLogos && paymentMethod === 'online' && (
-                            <div className="mt-4 pt-4 border-t border-gray-200">
-                              <p className="text-sm font-medium text-[#2C2C2C] mb-3">Select Payment Provider:</p>
-                              <div className="flex items-center gap-3 flex-wrap">
-                                {mobilePaymentLogos.map((payment) => (
-                                  <button
-                                    key={payment.name}
-                                    type="button"
-                                    onClick={() => setSelectedMobilePayment(payment.name)}
-                                    className={`relative h-[50px] px-4 bg-white rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
-                                      selectedMobilePayment === payment.name
-                                        ? 'border-[#C5A059] shadow-lg shadow-[#C5A059]/20'
-                                        : 'border-gray-200 hover:border-[#C5A059]/50'
-                                    }`}
-                                  >
-                                    <div className="relative h-[30px] w-auto min-w-[60px]">
-                                      <Image
-                                        src={payment.logo}
-                                        alt={payment.name}
-                                        fill
-                                        className="object-contain"
-                                        sizes="80px"
-                                        unoptimized
-                                      />
-                                    </div>
-                                  </button>
-                                ))}
-                              </div>
-                            </div>
-                          )}
                         </button>
                       );
                     })}
@@ -266,7 +344,7 @@ export default function CheckoutModal() {
                     </button>
                     <button
                       onClick={handlePayment}
-                      disabled={!paymentMethod || (paymentMethod === 'online' && !selectedMobilePayment)}
+                      disabled={!paymentMethod || (paymentMethod === 'online' && !selectedPaymentOption)}
                       className="flex-1 py-3 bg-gradient-to-r from-[#C5A059] to-[#B8935A] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Confirm Order
