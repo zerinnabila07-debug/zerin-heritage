@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CreditCard, Building2, Wallet, CheckCircle, Loader2 } from 'lucide-react';
 import { useCheckout } from '../context/CheckoutContext';
@@ -8,9 +9,15 @@ import Confetti from 'react-confetti';
 
 const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 const paymentMethods = [
-  { id: 'online', name: 'Online Payment', desc: 'bKash / Nagad / Cards', icon: CreditCard },
-  { id: 'bank', name: 'Bank Transfer', desc: 'Direct bank transfer', icon: Building2 },
-  { id: 'cod', name: 'Cash on Delivery', desc: 'Pay when you receive', icon: Wallet }
+  { id: 'online', name: 'Online Payment', desc: 'bKash / Nagad / Rocket', icon: CreditCard, hasLogos: true },
+  { id: 'bank', name: 'Bank Transfer', desc: 'Direct bank transfer', icon: Building2, hasLogos: false },
+  { id: 'cod', name: 'Cash on Delivery', desc: 'Pay when you receive', icon: Wallet, hasLogos: false }
+];
+
+const mobilePaymentLogos = [
+  { name: 'bKash', logo: '/images/payment/bkash.png' },
+  { name: 'Nagad', logo: '/images/payment/Nagad.png' },
+  { name: 'Rocket', logo: '/images/payment/rocket.png' }
 ];
 
 export default function CheckoutModal() {
@@ -193,21 +200,43 @@ export default function CheckoutModal() {
                         <button
                           key={method.id}
                           onClick={() => setPaymentMethod(method.id)}
-                          className={`w-full p-4 border-2 rounded-lg transition-all duration-300 flex items-center gap-4 ${
+                          className={`w-full p-4 border-2 rounded-lg transition-all duration-300 ${
                             paymentMethod === method.id
                               ? 'border-[#C5A059] bg-[#C5A059]/5 shadow-md'
                               : 'border-gray-200 hover:border-[#C5A059]/50'
                           }`}
                         >
-                          <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                            paymentMethod === method.id ? 'bg-[#C5A059] text-white' : 'bg-gray-100 text-gray-600'
-                          }`}>
-                            <Icon size={24} />
+                          <div className="flex items-center gap-4">
+                            <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
+                              paymentMethod === method.id ? 'bg-[#C5A059] text-white' : 'bg-gray-100 text-gray-600'
+                            }`}>
+                              <Icon size={24} />
+                            </div>
+                            <div className="text-left flex-1">
+                              <p className="font-semibold text-[#2C2C2C]">{method.name}</p>
+                              <p className="text-sm text-gray-600">{method.desc}</p>
+                            </div>
                           </div>
-                          <div className="text-left">
-                            <p className="font-semibold text-[#2C2C2C]">{method.name}</p>
-                            <p className="text-sm text-gray-600">{method.desc}</p>
-                          </div>
+                          
+                          {/* Show payment logos for online payment */}
+                          {method.hasLogos && (
+                            <div className="flex items-center gap-3 mt-3 pt-3 border-t border-gray-200">
+                              {mobilePaymentLogos.map((payment) => (
+                                <div 
+                                  key={payment.name}
+                                  className="relative h-8 w-16 bg-white rounded border border-gray-200 overflow-hidden hover:border-[#C5A059] transition-colors"
+                                >
+                                  <Image
+                                    src={payment.logo}
+                                    alt={payment.name}
+                                    fill
+                                    className="object-contain p-1"
+                                    sizes="64px"
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </button>
                       );
                     })}
