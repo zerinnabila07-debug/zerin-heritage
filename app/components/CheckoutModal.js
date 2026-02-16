@@ -15,9 +15,9 @@ const paymentMethods = [
 ];
 
 const mobilePaymentLogos = [
-  { name: 'bKash', logo: '/images/payment/bkash.png' },
-  { name: 'Nagad', logo: '/images/payment/Nagad.png' },
-  { name: 'Rocket', logo: '/images/payment/rocket.png' }
+  { name: 'bKash', logo: '/images/payment/bkash.png', bgColor: '#FFE8F0' },
+  { name: 'Nagad', logo: '/images/payment/Nagad.png', bgColor: '#FFF4E6' },
+  { name: 'Rocket', logo: '/images/payment/rocket.png', bgColor: '#F3E8FF' }
 ];
 
 export default function CheckoutModal() {
@@ -231,11 +231,12 @@ export default function CheckoutModal() {
                                     key={payment.name}
                                     type="button"
                                     onClick={() => setSelectedMobilePayment(payment.name)}
-                                    className={`relative h-[50px] px-4 bg-white rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
+                                    className={`relative h-[50px] px-4 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
                                       selectedMobilePayment === payment.name
                                         ? 'border-[#C5A059] shadow-lg shadow-[#C5A059]/20'
                                         : 'border-gray-200 hover:border-[#C5A059]/50'
                                     }`}
+                                    style={{ backgroundColor: payment.bgColor }}
                                   >
                                     <div className="relative h-[30px] w-auto min-w-[60px]">
                                       <Image
