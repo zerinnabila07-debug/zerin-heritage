@@ -4,8 +4,9 @@ import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { Eye } from 'lucide-react';
+import { Eye, Expand } from 'lucide-react';
 import { useCheckout } from '../context/CheckoutContext';
+import ImageLightbox from './ImageLightbox';
 import { 
   staggerContainer, 
   gridItemVariants, 
@@ -24,10 +25,22 @@ const trendingItems = [
 export default function TrendingNow() {
   const { openCheckout } = useCheckout();
   const [hoveredId, setHoveredId] = useState(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const headerRef = useRef(null);
   const gridRef = useRef(null);
   const isHeaderInView = useInView(headerRef, viewportOptions);
   const isGridInView = useInView(gridRef, viewportOptions);
+
+  const handleImageClick = (index) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const lightboxImages = trendingItems.map(item => ({
+    image: item.image,
+    title: item.name
+  }));
   
   return (
     <section className="py-16 px-6 md:px-12 lg:px-24 bg-gradient-to-b from-[#FFF9F5] to-white">
@@ -74,11 +87,12 @@ export default function TrendingNow() {
                 onMouseLeave={() => setHoveredId(null)}
                 className="group"
               >
-                <div className="relative aspect-[3/4] mb-3 overflow-hidden bg-gray-50">
+                <div className="relative aspect-[3/4] mb-3 overflow-hidden bg-gray-50 cursor-pointer">
                   <motion.div
                     animate={{ scale: hoveredId === item.id ? 1.08 : 1 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
                     className="w-full h-full"
+                    onClick={() => handleImageClick(trendingItems.indexOf(item))}
                   >
                     <Image
                       src={item.image}
@@ -101,6 +115,27 @@ export default function TrendingNow() {
                     transition={{ duration: 0.3 }}
                     className="absolute inset-0 bg-black/20"
                   />
+
+                  {/* Full View Icon */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ 
+                      opacity: hoveredId === item.id ? 1 : 0,
+                      scale: hoveredId === item.id ? 1 : 0.8
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute top-3 right-3 z-10"
+                  >
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleImageClick(trendingItems.indexOf(item));
+                      }}
+                      className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg"
+                    >
+                      <Expand size={18} className="text-[#1A1A1A]" />
+                    </button>
+                  </motion.div>
 
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
@@ -151,6 +186,15 @@ export default function TrendingNow() {
             </Link>
           </motion.div>
         </div>
+
+        {/* Image Lightbox */}
+        <ImageLightbox
+          isOpen={lightboxOpen}
+          onClose={() => setLightboxOpen(false)}
+          images={lightboxImages}
+          currentIndex={currentImageIndex}
+          onNavigate={setCurrentImageIndex}
+        />
     </section>
   );
 }
