@@ -29,14 +29,14 @@ export default function FalgunSection() {
   const isGridInView = useInView(gridRef, viewportOptions);
 
   return (
-    <section className="py-24 px-6 md:px-12 lg:px-24 bg-gradient-to-b from-white to-[#FFF9F5]">
+    <section className="py-16 px-6 md:px-12 lg:px-24 bg-gradient-to-b from-white to-[#FFF9F5]">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           ref={headerRef}
           variants={headerVariants}
           initial="hidden"
           animate={isHeaderInView ? "visible" : "hidden"}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <motion.p 
             variants={headerItemVariants}

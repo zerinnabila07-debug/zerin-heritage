@@ -19,7 +19,7 @@ const trendingProducts = [
     id: 1,
     name: 'Embroidered Silk Saree',
     price: '৳ 8,500',
-    image: '/images/eid/eid-1.jpg',
+    image: '/images/eid/eid1.jpg',
     tag: 'Bestseller',
     category: 'Sarees'
   },
@@ -27,7 +27,7 @@ const trendingProducts = [
     id: 2,
     name: 'Designer Kurti Set',
     price: '৳ 4,200',
-    image: '/images/eid/eid-2.jpg',
+    image: '/images/eid/eid2.jpg',
     tag: 'New Arrival',
     category: 'Kurtis'
   },
@@ -35,7 +35,7 @@ const trendingProducts = [
     id: 3,
     name: 'Festive Lehenga',
     price: '৳ 12,000',
-    image: '/images/eid/eid-3.jpg',
+    image: '/images/eid/eid3.jpg',
     tag: 'Trending',
     category: 'Lehengas'
   },
@@ -43,7 +43,7 @@ const trendingProducts = [
     id: 4,
     name: 'Banarasi Silk Saree',
     price: '৳ 9,800',
-    image: '/images/falgun/falgun-1.jpg',
+    image: '/images/falgun/f1.jpg',
     tag: 'Hot',
     category: 'Sarees'
   },
@@ -51,7 +51,7 @@ const trendingProducts = [
     id: 5,
     name: 'Georgette Anarkali',
     price: '৳ 5,500',
-    image: '/images/falgun/falgun-2.jpg',
+    image: '/images/falgun/f2.jpg',
     tag: 'Popular',
     category: 'Anarkalis'
   },
@@ -59,7 +59,7 @@ const trendingProducts = [
     id: 6,
     name: 'Printed Palazzo Set',
     price: '৳ 3,800',
-    image: '/images/falgun/falgun-3.jpg',
+    image: '/images/falgun/f3.jpg',
     tag: 'New',
     category: 'Sets'
   },
@@ -67,7 +67,7 @@ const trendingProducts = [
     id: 7,
     name: 'Chiffon Party Saree',
     price: '৳ 7,200',
-    image: '/images/lookbook/look-1.jpg',
+    image: '/images/lookbook/l1.jpg',
     tag: 'Trending',
     category: 'Sarees'
   },
@@ -75,7 +75,7 @@ const trendingProducts = [
     id: 8,
     name: 'Velvet Gown',
     price: '৳ 6,500',
-    image: '/images/lookbook/look-2.jpg',
+    image: '/images/lookbook/l2.jpg',
     tag: 'Exclusive',
     category: 'Gowns'
   },
@@ -83,7 +83,7 @@ const trendingProducts = [
     id: 9,
     name: 'Cotton Silk Kurti',
     price: '৳ 3,200',
-    image: '/images/lookbook/look-3.jpg',
+    image: '/images/lookbook/l3.jpg',
     tag: 'Bestseller',
     category: 'Kurtis'
   },
@@ -91,7 +91,7 @@ const trendingProducts = [
     id: 10,
     name: 'Organza Saree',
     price: '৳ 8,900',
-    image: '/images/lookbook/look-4.jpg',
+    image: '/images/lookbook/l1.jpg',
     tag: 'Premium',
     category: 'Sarees'
   },
@@ -99,7 +99,7 @@ const trendingProducts = [
     id: 11,
     name: 'Sharara Suit',
     price: '৳ 7,800',
-    image: '/images/lookbook/look-5.jpg',
+    image: '/images/lookbook/l2.jpg',
     tag: 'Hot',
     category: 'Suits'
   },
@@ -107,7 +107,7 @@ const trendingProducts = [
     id: 12,
     name: 'Embellished Lehenga',
     price: '৳ 14,500',
-    image: '/images/lookbook/look-6.jpg',
+    image: '/images/lookbook/l3.jpg',
     tag: 'Luxury',
     category: 'Lehengas'
   }
@@ -133,7 +133,7 @@ export default function TrendingPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Header Section */}
-      <section className="pt-32 pb-12 px-6 md:px-12 lg:px-24 bg-gradient-to-b from-[#FFF9F5] to-white">
+      <section className="pt-32 pb-8 px-6 md:px-12 lg:px-24 bg-gradient-to-b from-[#FFF9F5] to-white">
         <div className="max-w-7xl mx-auto">
           {/* Back to Home Button */}
           <motion.div
@@ -159,7 +159,7 @@ export default function TrendingPage() {
             variants={headerVariants}
             initial="hidden"
             animate={isHeaderInView ? "visible" : "hidden"}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
             <motion.p
               variants={headerItemVariants}
@@ -184,7 +184,7 @@ export default function TrendingPage() {
       </section>
 
       {/* Products Grid Section */}
-      <section className="py-12 px-6 md:px-12 lg:px-24 bg-white">
+      <section className="py-16 px-6 md:px-12 lg:px-24 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             ref={gridRef}
