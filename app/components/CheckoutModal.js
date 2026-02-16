@@ -215,9 +215,9 @@ export default function CheckoutModal() {
                   
                   {/* Online Payment Section */}
                   <div className="mb-6">
-                    <button
+                    <div
                       onClick={() => setPaymentMethod('online')}
-                      className={`w-full p-4 border-2 rounded-lg transition-all duration-300 ${
+                      className={`w-full p-4 border-2 rounded-lg transition-all duration-300 cursor-pointer ${
                         paymentMethod === 'online'
                           ? 'border-[#C5A059] bg-[#C5A059]/5 shadow-md'
                           : 'border-gray-200 hover:border-[#C5A059]/50'
@@ -243,6 +243,7 @@ export default function CheckoutModal() {
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.3 }}
                           className="mt-4 pt-4 border-t border-gray-200"
+                          onClick={(e) => e.stopPropagation()}
                         >
                           {/* Category Tabs */}
                           <div className="flex gap-2 mb-4 overflow-x-auto pb-2">
@@ -250,7 +251,8 @@ export default function CheckoutModal() {
                               <button
                                 key={category.id}
                                 type="button"
-                                onClick={() => {
+                                onClick={(e) => {
+                                  e.stopPropagation();
                                   setActiveCategory(category.id);
                                   setSelectedPaymentOption('');
                                 }}
@@ -279,7 +281,10 @@ export default function CheckoutModal() {
                                 <button
                                   key={option.name}
                                   type="button"
-                                  onClick={() => setSelectedPaymentOption(option.name)}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedPaymentOption(option.name);
+                                  }}
                                   className={`relative h-[60px] p-3 bg-white rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
                                     selectedPaymentOption === option.name
                                       ? 'border-[#C5A059] shadow-lg shadow-[#C5A059]/20'
@@ -302,7 +307,7 @@ export default function CheckoutModal() {
                           </AnimatePresence>
                         </motion.div>
                       )}
-                    </button>
+                    </div>
                   </div>
 
                   {/* Other Payment Methods */}

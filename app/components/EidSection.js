@@ -65,7 +65,7 @@ export default function EidSection() {
           animate={isGridInView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {eidProducts.map((product) => (
+          {eidProducts.map((product, index) => (
             <motion.div
               key={product.id}
               variants={gridItemVariants}

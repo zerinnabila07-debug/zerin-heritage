@@ -65,7 +65,7 @@ export default function FalgunSection() {
           animate={isGridInView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {falgunProducts.map((product) => (
+          {falgunProducts.map((product, index) => (
             <motion.div
               key={product.id}
               variants={gridItemVariants}
