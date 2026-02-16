@@ -30,6 +30,7 @@ export default function CheckoutModal() {
     size: 'M'
   });
   const [paymentMethod, setPaymentMethod] = useState('');
+  const [selectedMobilePayment, setSelectedMobilePayment] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
 
@@ -44,6 +45,7 @@ export default function CheckoutModal() {
 
   const handlePayment = async () => {
     if (!paymentMethod) return;
+    if (paymentMethod === 'online' && !selectedMobilePayment) return;
     
     if (paymentMethod === 'online') {
       setIsProcessing(true);
@@ -62,6 +64,7 @@ export default function CheckoutModal() {
       setStep(1);
       setFormData({ fullName: '', phone: '', address: '', size: 'M' });
       setPaymentMethod('');
+      setSelectedMobilePayment('');
       setShowConfetti(false);
     }, 300);
   };
@@ -218,23 +221,34 @@ export default function CheckoutModal() {
                             </div>
                           </div>
                           
-                          {/* Show payment logos for online payment */}
-                          {method.hasLogos && (
-                            <div className="flex items-center gap-3 mt-3 pt-3 border-t border-gray-200">
-                              {mobilePaymentLogos.map((payment) => (
-                                <div 
-                                  key={payment.name}
-                                  className="relative h-8 w-16 bg-white rounded border border-gray-200 overflow-hidden hover:border-[#C5A059] transition-colors"
-                                >
-                                  <Image
-                                    src={payment.logo}
-                                    alt={payment.name}
-                                    fill
-                                    className="object-contain p-1"
-                                    sizes="64px"
-                                  />
-                                </div>
-                              ))}
+                          {/* Show clickable payment logos for online payment */}
+                          {method.hasLogos && paymentMethod === 'online' && (
+                            <div className="mt-4 pt-4 border-t border-gray-200">
+                              <p className="text-sm font-medium text-[#2C2C2C] mb-3">Select Payment Provider:</p>
+                              <div className="flex items-center gap-3 flex-wrap">
+                                {mobilePaymentLogos.map((payment) => (
+                                  <button
+                                    key={payment.name}
+                                    type="button"
+                                    onClick={() => setSelectedMobilePayment(payment.name)}
+                                    className={`relative h-[50px] px-4 bg-white rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
+                                      selectedMobilePayment === payment.name
+                                        ? 'border-[#C5A059] shadow-lg shadow-[#C5A059]/20'
+                                        : 'border-gray-200 hover:border-[#C5A059]/50'
+                                    }`}
+                                  >
+                                    <div className="relative h-[30px] w-auto min-w-[60px]">
+                                      <Image
+                                        src={payment.logo}
+                                        alt={payment.name}
+                                        fill
+                                        className="object-contain"
+                                        sizes="80px"
+                                      />
+                                    </div>
+                                  </button>
+                                ))}
+                              </div>
                             </div>
                           )}
                         </button>
@@ -251,7 +265,7 @@ export default function CheckoutModal() {
                     </button>
                     <button
                       onClick={handlePayment}
-                      disabled={!paymentMethod}
+                      disabled={!paymentMethod || (paymentMethod === 'online' && !selectedMobilePayment)}
                       className="flex-1 py-3 bg-gradient-to-r from-[#C5A059] to-[#B8935A] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Confirm Order
