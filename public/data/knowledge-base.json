@@ -1,0 +1,24 @@
+{
+  "brand": "Zerin Heritage",
+  "founder": "Zerin Nabila",
+  "vision": "Providing premium luxury clothing with a touch of South Asian heritage.",
+  "pricing": {
+    "bridal_henna": "1500 BDT",
+    "occasional_henna": "800 BDT",
+    "custom_designs": "Starts from 1000 BDT (varies by complexity)"
+  },
+  "collections": [
+    { "id": "eid", "name": "Eid Collection 2026", "offers": "Up to 60% OFF" },
+    { "id": "falgun", "name": "Spring Heritage (Basanti)", "vibes": "Joyful & Traditional" }
+  ],
+  "aftercare_tips": [
+    "Leave henna for 8+ hours.",
+    "Use clove steam for a darker stain.",
+    "Avoid soap/water for the first 24 hours."
+  ],
+  "contact": {
+    "phone": "+880 1234-567890",
+    "email": "info@zerinheritage.com",
+    "location": "Dhaka, Bangladesh"
+  }
+}

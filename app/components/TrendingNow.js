@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { Eye } from 'lucide-react';
 import { useCheckout } from '../context/CheckoutContext';
@@ -139,13 +140,15 @@ export default function TrendingNow() {
             viewport={viewportOptions}
             className="text-center mt-12"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-12 py-4 border-2 border-[#C5A059] text-[#C5A059] font-sans font-medium text-lg uppercase tracking-wider hover:bg-[#C5A059] hover:text-white transition-all duration-300"
-            >
-              View All Trending
-            </motion.button>
+            <Link href="/trending">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-12 py-4 border-2 border-[#C5A059] text-[#C5A059] font-sans font-medium text-lg uppercase tracking-wider hover:bg-[#C5A059] hover:text-white transition-all duration-300"
+              >
+                View All Trending
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
     </section>
