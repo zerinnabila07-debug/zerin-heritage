@@ -112,7 +112,7 @@ export default function Chatbot() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-gradient-to-br from-[#C5A059] to-[#B8935A] text-white rounded-full shadow-2xl flex items-center justify-center hover:shadow-[#C5A059]/50 transition-all duration-300"
+            className="fixed bottom-24 md:bottom-6 right-6 z-50 w-16 h-16 bg-gradient-to-br from-[#C5A059] to-[#B8935A] text-white rounded-full shadow-2xl flex items-center justify-center hover:shadow-[#C5A059]/50 transition-all duration-300"
             aria-label="Open chat"
           >
             <MessageCircle size={28} />
@@ -133,8 +133,8 @@ export default function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
             transition={{ type: 'spring', damping: 25 }}
-            className="fixed bottom-6 right-6 z-50 w-full max-w-md h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden"
-            style={{ maxHeight: 'calc(100vh - 100px)' }}
+            className="fixed bottom-24 md:bottom-6 right-6 z-50 w-full max-w-md h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            style={{ maxHeight: 'calc(100vh - 180px)' }}
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-[#C5A059] to-[#B8935A] text-white px-6 py-4 flex items-center justify-between">
