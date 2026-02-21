@@ -247,7 +247,7 @@ export default function Chatbot() {
                 </button>
               </div>
               <p className="text-[10px] text-gray-400 mt-2 text-center">
-                Powered by Gemini AI • Zerin Heritage
+                Powered by Local Knowledge Base • Zerin Heritage
               </p>
             </div>
           </motion.div>
