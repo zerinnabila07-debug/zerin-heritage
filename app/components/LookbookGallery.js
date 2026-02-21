@@ -13,12 +13,12 @@ import {
 } from '../utils/animations';
 
 const lookbookItems = [
-  { id: 1, image: '/images/lookbook/l1.jpg', height: 'h-[400px]', title: 'Spring Collection' },
-  { id: 2, image: '/images/lookbook/l2.jpg', height: 'h-[500px]', title: 'Evening Elegance' },
-  { id: 3, image: '/images/lookbook/l3.jpg', height: 'h-[450px]', title: 'Bridal Dreams' },
-  { id: 4, image: '/images/lookbook/l1.jpg', height: 'h-[550px]', title: 'Heritage Revival' },
-  { id: 5, image: '/images/lookbook/l2.jpg', height: 'h-[400px]', title: 'Modern Grace' },
-  { id: 6, image: '/images/lookbook/l3.jpg', height: 'h-[480px]', title: 'Timeless Beauty' }
+  { id: 1, image: '/images/lookbook/l1.jpg', title: 'Spring Collection' },
+  { id: 2, image: '/images/lookbook/l2.jpg', title: 'Evening Elegance' },
+  { id: 3, image: '/images/lookbook/l3.jpg', title: 'Bridal Dreams' },
+  { id: 4, image: '/images/lookbook/l1.jpg', title: 'Heritage Revival' },
+  { id: 5, image: '/images/lookbook/l2.jpg', title: 'Modern Grace' },
+  { id: 6, image: '/images/lookbook/l3.jpg', title: 'Timeless Beauty' }
 ];
 
 export default function LookbookGallery() {
@@ -59,17 +59,17 @@ export default function LookbookGallery() {
           variants={staggerContainer}
           initial="hidden"
           animate={isGalleryInView ? "visible" : "hidden"}
-          className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {lookbookItems.map((item) => (
+          {lookbookItems.map((item, index) => (
             <motion.div
               key={item.id}
               variants={gridItemVariants}
-              className="break-inside-avoid relative group cursor-pointer"
+              className="relative group cursor-pointer flex flex-col"
               onMouseEnter={() => setHoveredId(item.id)}
               onMouseLeave={() => setHoveredId(null)}
             >
-              <div className={`relative ${item.height} overflow-hidden`}>
+              <div className="relative aspect-[3/4] overflow-hidden flex items-center justify-center bg-gray-50">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.6 }}
@@ -79,7 +79,7 @@ export default function LookbookGallery() {
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover"
+                    className="object-cover object-[center_10%]"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </motion.div>

@@ -70,9 +70,9 @@ export default function EidSection() {
               key={product.id}
               variants={gridItemVariants}
               whileHover={{ y: -10 }}
-              className="group cursor-pointer"
+              className="group cursor-pointer flex flex-col h-full"
             >
-                  <div className="relative aspect-[4/5] overflow-hidden mb-4">
+                  <div className="relative aspect-[3/4] overflow-hidden flex items-center justify-center bg-gray-50">
                     <motion.div
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.6 }}
@@ -82,7 +82,7 @@ export default function EidSection() {
                         src={product.image}
                         alt={product.title}
                         fill
-                        className="object-cover"
+                        className="object-cover object-[center_10%]"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
                       />
                     </motion.div>

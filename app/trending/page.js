@@ -213,12 +213,10 @@ export default function TrendingPage() {
                 variants={gridItemVariants}
                 onMouseEnter={() => setHoveredId(product.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                className="group"
+                className="group flex flex-col h-full"
               >
-                {/* Product Card */}
-                <div className="relative bg-white overflow-hidden">
-                  {/* Image Container */}
-                  <div className="relative aspect-[3/4] overflow-hidden bg-[#F5F5F5] cursor-pointer">
+                <div className="relative bg-white overflow-hidden flex flex-col flex-1">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-[#F5F5F5] cursor-pointer flex items-center justify-center">
                     <motion.div
                       animate={{ scale: hoveredId === product.id ? 1.08 : 1 }}
                       transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
@@ -229,7 +227,7 @@ export default function TrendingPage() {
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-cover object-center"
+                        className="object-cover object-[center_10%]"
                         sizes="(max-width: 768px) 50vw, 25vw"
                       />
                     </motion.div>
@@ -292,7 +290,6 @@ export default function TrendingPage() {
                     </motion.div>
                   </div>
 
-                  {/* Product Info */}
                   <div className="pt-4 pb-2">
                     <p className="text-xs font-sans text-[#8A8A8A] mb-1 uppercase tracking-wide">
                       {product.category}

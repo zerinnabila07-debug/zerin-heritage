@@ -85,9 +85,9 @@ export default function TrendingNow() {
                 variants={gridItemVariants}
                 onMouseEnter={() => setHoveredId(item.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                className="group"
+                className="group flex flex-col h-full"
               >
-                <div className="relative aspect-[3/4] mb-3 overflow-hidden bg-gray-50 cursor-pointer">
+                <div className="relative aspect-[3/4] overflow-hidden bg-gray-50 cursor-pointer flex items-center justify-center">
                   <motion.div
                     animate={{ scale: hoveredId === item.id ? 1.08 : 1 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
@@ -98,7 +98,7 @@ export default function TrendingNow() {
                       src={item.image}
                       alt={item.name}
                       fill
-                      className="object-cover"
+                      className="object-cover object-[center_10%]"
                       sizes="(max-width: 768px) 50vw, 25vw"
                     />
                   </motion.div>
@@ -156,7 +156,7 @@ export default function TrendingNow() {
                   </motion.div>
                 </div>
 
-                <div className="space-y-1">
+                <div className="space-y-1 mt-3">
                   <h3 className="text-base font-sans font-semibold text-[#1A1A1A] leading-tight">
                     {item.name}
                   </h3>

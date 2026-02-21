@@ -73,16 +73,16 @@ export default function ImageLightbox({ isOpen, onClose, images, currentIndex, o
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
-            className="relative w-full h-full max-w-6xl max-h-[90vh] mx-auto px-20"
+            className="relative w-full h-full max-w-6xl max-h-[90vh] mx-auto px-20 flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full flex items-center justify-center">
               <Image
                 src={images[currentIndex]?.image}
                 alt={images[currentIndex]?.title || 'Gallery image'}
                 fill
                 className="object-contain"
-                style={{ objectPosition: 'center 10%' }}
+                style={{ objectPosition: 'center' }}
                 sizes="100vw"
                 priority
               />

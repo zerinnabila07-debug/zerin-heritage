@@ -95,13 +95,13 @@ export default function HeroSlider() {
             x: { type: "spring", stiffness: 300, damping: 30 },
             opacity: { duration: 0.5 }
           }}
-          className="absolute inset-0"
+          className="absolute inset-0 flex items-center justify-center"
         >
           <Image
             src={slides[currentSlide].image}
             alt={slides[currentSlide].title}
             fill
-            className="object-cover object-[center_30%]"
+            className="object-cover object-[center_10%]"
             priority
             quality={90}
           />
