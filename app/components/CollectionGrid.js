@@ -104,10 +104,8 @@ export default function CollectionGrid() {
               onMouseLeave={() => setHoveredId(null)}
               className="group flex flex-col h-full"
             >
-              <div className="relative aspect-[3/4] overflow-hidden bg-gray-50 cursor-pointer flex items-center justify-center">
-                <motion.div
-                  animate={{ scale: hoveredId === collection.id ? 1.08 : 1 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
+              <div className="relative aspect-[2/3] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 cursor-pointer flex items-center justify-center">
+                <div
                   className="w-full h-full"
                   onClick={() => handleImageClick(collections.indexOf(collection))}
                 >
@@ -115,10 +113,11 @@ export default function CollectionGrid() {
                     src={collection.image}
                     alt={collection.title}
                     fill
-                    className="object-cover object-[center_10%]"
+                    className="object-contain p-2"
+                    style={{ objectPosition: 'center' }}
                     sizes="(max-width: 768px) 50vw, 25vw"
                   />
-                </motion.div>
+                </div>
 
                 <div className="absolute top-3 left-3 z-10">
                   <span className="px-2.5 py-1 bg-white/95 backdrop-blur-sm text-[#1A1A1A] text-[10px] font-sans font-medium uppercase tracking-wider shadow-sm">

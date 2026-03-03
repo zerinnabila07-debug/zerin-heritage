@@ -72,22 +72,17 @@ export default function FalgunSection() {
               whileHover={{ y: -10 }}
               className="group cursor-pointer flex flex-col h-full"
             >
-                  <div className="relative aspect-[3/4] overflow-hidden flex items-center justify-center bg-gray-50">
-                    <motion.div
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                      className="w-full h-full"
-                    >
-                      <Image
-                        src={product.image}
-                        alt={product.title}
-                        fill
-                        className="object-cover object-[center_10%]"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
-                      />
-                    </motion.div>
+                  <div className="relative aspect-[2/3] overflow-hidden flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      fill
+                      className="object-contain p-2"
+                      style={{ objectPosition: 'center' }}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
+                    />
                     
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                     
                     <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <motion.button

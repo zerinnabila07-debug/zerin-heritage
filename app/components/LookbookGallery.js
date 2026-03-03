@@ -69,20 +69,16 @@ export default function LookbookGallery() {
               onMouseEnter={() => setHoveredId(item.id)}
               onMouseLeave={() => setHoveredId(null)}
             >
-              <div className="relative aspect-[3/4] overflow-hidden flex items-center justify-center bg-gray-50">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.6 }}
-                  className="w-full h-full"
-                >
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover object-[center_10%]"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                </motion.div>
+              <div className="relative aspect-[2/3] overflow-hidden flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-contain p-2"
+                  style={{ objectPosition: 'center' }}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+
 
                 <div className={`absolute inset-0 bg-black/40 transition-opacity duration-500 ${
                   hoveredId === item.id ? 'opacity-100' : 'opacity-0'

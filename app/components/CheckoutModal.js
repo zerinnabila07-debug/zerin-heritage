@@ -267,7 +267,6 @@ export default function CheckoutModal() {
                             ))}
                           </div>
 
-                          {/* Payment Options Grid */}
                           <AnimatePresence mode="wait">
                             <motion.div
                               key={activeCategory}
@@ -285,19 +284,19 @@ export default function CheckoutModal() {
                                     e.stopPropagation();
                                     setSelectedPaymentOption(option.name);
                                   }}
-                                  className={`relative h-[60px] p-3 bg-white rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
+                                  className={`flex items-center justify-center p-4 bg-white rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
                                     selectedPaymentOption === option.name
                                       ? 'border-[#C5A059] shadow-lg shadow-[#C5A059]/20'
                                       : 'border-gray-200 hover:border-[#C5A059]/50'
                                   }`}
                                 >
-                                  <div className="relative h-full w-full">
+                                  <div className="relative h-12 w-full">
                                     <Image
                                       src={option.logo}
                                       alt={option.name}
                                       fill
                                       className="object-contain"
-                                      sizes="120px"
+                                      sizes="150px"
                                       unoptimized
                                     />
                                   </div>

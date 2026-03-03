@@ -82,7 +82,7 @@ export default function HeroSlider() {
   };
 
   return (
-    <section className="relative w-full min-h-[500px] h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-black">
+    <section className="relative w-full min-h-[500px] h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-gradient-to-br from-gray-900 to-black">
       <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
           key={currentSlide}
@@ -97,17 +97,19 @@ export default function HeroSlider() {
           }}
           className="absolute inset-0 flex items-center justify-center"
         >
-          <Image
-            src={slides[currentSlide].image}
-            alt={slides[currentSlide].title}
-            fill
-            className="object-cover object-[center_10%]"
-            priority
-            quality={90}
-          />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Image
+              src={slides[currentSlide].image}
+              alt={slides[currentSlide].title}
+              fill
+              className="object-contain"
+              style={{ objectPosition: 'center' }}
+              priority
+              quality={90}
+            />
+          </div>
           
-          <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/50 to-black/60"></div>
-          <div className="absolute inset-0 bg-black/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/30 pointer-events-none"></div>
 
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center px-6 max-w-4xl transform -translate-y-[5%]">
