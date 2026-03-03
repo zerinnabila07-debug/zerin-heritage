@@ -102,11 +102,10 @@ export default function HeroSlider() {
               src={slides[currentSlide].image}
               alt={slides[currentSlide].title}
               fill
-              className="object-contain"
-              style={{ objectPosition: 'center' }}
-              priority
-              quality={90}
-            />
+            className="object-contain"
+            style={{ objectPosition: 'center' }}
+            priority
+          />
           </div>
           
           <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/30 pointer-events-none"></div>

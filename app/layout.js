@@ -1,9 +1,5 @@
 import "./globals.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import ScrollToTop from "./components/ScrollToTop";
-import CheckoutModal from "./components/CheckoutModal";
-import Chatbot from "./components/Chatbot";
+import ClientLayout from "./components/ClientLayout";
 import StructuredData from "./components/StructuredData";
 import { CheckoutProvider } from "./context/CheckoutContext";
 
@@ -59,7 +55,12 @@ export const metadata = {
     },
   },
   icons: {
-    icon: '/logo.png',
+    icon: [
+      { url: '/logo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: '/logo.png',
+    shortcut: '/logo.png',
   },
   manifest: '/site.webmanifest',
   verification: {
@@ -87,12 +88,9 @@ export default function RootLayout({ children }) {
       </head>
       <body className="antialiased">
         <CheckoutProvider>
-          <Navbar />
-          {children}
-          <Footer />
-          <ScrollToTop />
-          <CheckoutModal />
-          <Chatbot />
+          <ClientLayout>
+            {children}
+          </ClientLayout>
         </CheckoutProvider>
       </body>
     </html>

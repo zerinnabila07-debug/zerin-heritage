@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, User, Heart, ShoppingBag, Menu, ChevronRight, ChevronDown, X } from 'lucide-react';
+import { Search, User, Heart, ShoppingBag, Menu, ChevronRight, ChevronDown, X, LayoutDashboard } from 'lucide-react';
 
 const menuItems = [
   { 
@@ -268,6 +268,18 @@ export default function Navbar() {
               >
                 <Search size={22} strokeWidth={1.5} />
               </button>
+              <Link 
+                href="/admin/overview"
+                className={`hidden md:block hover:scale-110 transition-all duration-300 ${
+                  isScrolled 
+                    ? 'text-[#1A1A1A] hover:text-[#C5A059]' 
+                    : 'text-white hover:text-[#C5A059]'
+                }`}
+                aria-label="Admin Dashboard"
+                title="Admin Dashboard"
+              >
+                <LayoutDashboard size={22} strokeWidth={1.5} />
+              </Link>
               <Link 
                 href="/login"
                 className={`hidden md:block hover:scale-110 transition-all duration-300 ${

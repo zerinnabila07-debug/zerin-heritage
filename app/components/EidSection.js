@@ -80,6 +80,7 @@ export default function EidSection() {
                       className="object-contain p-2"
                       style={{ objectPosition: 'center' }}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
+                      loading="lazy"
                     />
                     
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>

@@ -19,6 +19,7 @@
     "react": "19.2.3",
     "react-confetti": "^6.4.0",
     "react-dom": "19.2.3",
+    "recharts": "^3.7.0",
     "three": "^0.182.0"
   },
   "devDependencies": {

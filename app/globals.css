@@ -115,3 +115,56 @@ section {
 .border-pink {
   border-color: var(--color-pink);
 }
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* Consistent Button Styles */
+.btn-primary {
+  @apply px-6 py-3 bg-[#C5A059] text-white rounded-lg hover:bg-[#B8935A] transition-all duration-300 font-sans font-medium shadow-lg hover:shadow-xl;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 border-2 border-[#C5A059] text-[#C5A059] rounded-lg hover:bg-[#C5A059] hover:text-white transition-all duration-300 font-sans font-medium;
+}
+
+.btn-admin {
+  @apply px-4 py-2 bg-[#C5A059] text-white rounded-lg hover:bg-[#B8935A] transition-colors font-sans text-sm font-medium;
+}
+
+/* Consistent Card Shadows */
+.card-shadow {
+  @apply shadow-sm hover:shadow-lg transition-shadow duration-300;
+}
+
+.card-shadow-xl {
+  @apply shadow-lg hover:shadow-2xl transition-shadow duration-300;
+}
+
+/* Consistent Input Styles */
+.input-field {
+  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-transparent font-sans text-sm;
+}
+
+/* Loading Spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
